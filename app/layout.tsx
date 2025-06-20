@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Nunito } from 'next/font/google';
+import Navbar from './components/navbar/Navbar';
 
 export const metadata: Metadata = {
   title: 'Stay Scape',
@@ -18,7 +19,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${font.className} antialiased`}>{children}</body>
+      <body className={`${font.className} antialiased`}>
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
