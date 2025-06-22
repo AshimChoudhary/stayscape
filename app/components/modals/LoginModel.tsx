@@ -1,21 +1,22 @@
 'use client';
 
+import { signIn } from 'next-auth/react';
 import axios from 'axios';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { AiFillGithub } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import useRegister from '@/app/hooks/useRegisterModel';
-import { register } from 'module';
-import { error, log } from 'console';
 import Modals from './Modals';
 import Heading from '../Heading';
 import Input from '../Inputs/Input';
 import toast from 'react-hot-toast';
 import Buttons from '../Buttons';
 import useLoginModel from '@/app/hooks/useLoginModel';
+import { useRouter } from 'next/navigation';
 
 const LoginModel = () => {
+  const router = useRouter();
   const registerModel = useRegister();
   const loginModel = useLoginModel();
   const [loading, setLoading] = useState(false);
@@ -26,7 +27,6 @@ const LoginModel = () => {
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
-      name: '',
       email: '',
       password: '',
     },
@@ -35,26 +35,26 @@ const LoginModel = () => {
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setLoading(true);
 
-    axios
-      .post('/api/register', data)
-      .then(() => {
-        registerModel.onClose();
-      })
-      .catch((error) => {
-        toast.error('You trippin');
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    signIn('credentials', {
+      ...data,
+      redirect: false,
+    }).then((callback) => {
+      setLoading(false);
+
+      if (callback?.ok) {
+        toast.success('Logged In');
+        router.refresh();
+        loginModel.onClose();
+      }
+      if (callback?.error) {
+        toast.error(callback.error);
+      }
+    });
   };
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
-      <Heading
-        title="Welcome to StayScape"
-        subtitle="Create an Account"
-        // center
-      />
+      <Heading title="Welcome Back!!" subtitle="Login to your Account!" />
 
       <Input
         id="email"
@@ -65,14 +65,7 @@ const LoginModel = () => {
         errors={errors}
         required
       />
-      <Input
-        id="name"
-        label="Name"
-        disabled={loading}
-        register={register}
-        errors={errors}
-        required
-      />
+
       <Input
         id="password"
         type="password"
@@ -121,7 +114,7 @@ const LoginModel = () => {
     <Modals
       disabled={loading}
       isOpen={loginModel.isOpen}
-      title="Register"
+      title="Log In"
       actionLabel="Continue"
       onClose={loginModel.onClose}
       onSubmit={handleSubmit(onSubmit)}

@@ -4,7 +4,7 @@ import { Nunito } from 'next/font/google';
 import Navbar from './components/navbar/Navbar';
 import Client from './components/Client';
 import RegisterModel from './components/modals/RegisterModel';
-import LoginModel from './components/modals/loginModel';
+import LoginModel from './components/modals/LoginModel';
 import ToasterProvider from './Providers/ToasterProvider';
 
 export const metadata: Metadata = {
