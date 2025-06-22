@@ -1,3 +1,5 @@
+'use client';
+
 import Components from '../Components';
 import Logo from './Logo';
 import Search from './Search';
