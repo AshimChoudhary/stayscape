@@ -32,8 +32,8 @@ const Buttons: FC<ButtonProps> = ({
     hover:opacity-80
     transition
     w-full
-    ${outline ? 'bg-white' : 'bg-green-500'}
-    ${outline ? 'border-black' : 'border-green-500'}
+    ${outline ? 'bg-white' : 'bg-teal-500'}
+    ${outline ? 'border-black' : 'border-teal-500'}
     ${outline ? 'text-black' : 'text-white'}
     ${small ? 'py-1' : 'py-3'}
     ${small ? 'text-sm' : 'text-md'}

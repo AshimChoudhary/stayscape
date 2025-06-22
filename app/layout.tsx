@@ -4,6 +4,7 @@ import { Nunito } from 'next/font/google';
 import Navbar from './components/navbar/Navbar';
 import Client from './components/Client';
 import RegisterModel from './components/modals/RegisterModel';
+import ToasterProvider from './Providers/ToasterProvider';
 
 export const metadata: Metadata = {
   title: 'Stay Scape',
@@ -23,6 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${font.className} antialiased`}>
         <Client>
+          <ToasterProvider />
           <RegisterModel />
           <Navbar />
         </Client>
