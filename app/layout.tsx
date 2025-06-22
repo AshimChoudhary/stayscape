@@ -3,7 +3,7 @@ import './globals.css';
 import { Nunito } from 'next/font/google';
 import Navbar from './components/navbar/Navbar';
 import Client from './components/Client';
-import Modals from './components/modals/Modals';
+import RegisterModel from './components/modals/RegisterModel';
 
 export const metadata: Metadata = {
   title: 'Stay Scape',
@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${font.className} antialiased`}>
         <Client>
-          <Modals isOpen title="Hola Amigos" />
+          <RegisterModel />
           <Navbar />
         </Client>
         {children}

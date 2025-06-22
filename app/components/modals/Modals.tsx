@@ -14,7 +14,7 @@ interface ModalProps {
   actionLabel: string;
   disabled?: boolean;
   secondaryAction?: () => void;
-  secondaryLabel?: string;
+  secondaryActionLabel?: string;
 }
 
 const Modals: FC<ModalProps> = ({
@@ -23,7 +23,7 @@ const Modals: FC<ModalProps> = ({
   onSubmit,
   disabled,
   secondaryAction,
-  secondaryLabel,
+  secondaryActionLabel,
   title,
   body,
   footer,
@@ -137,7 +137,19 @@ const Modals: FC<ModalProps> = ({
 
               <div className="flex flex-col p-6 gap-2">
                 <div className="flex flex-row items-center gap-4 w-full">
-                  <Buttons />
+                  {secondaryAction && secondaryActionLabel && (
+                    <Buttons
+                      outline
+                      disabled={disabled}
+                      label={secondaryActionLabel}
+                      onclick={handleSecondaryAction}
+                    />
+                  )}
+                  <Buttons
+                    disabled={disabled}
+                    label={actionLabel}
+                    onclick={handleSubmit}
+                  />
                 </div>
               </div>
             </div>
