@@ -2,11 +2,9 @@
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 
 const Logo = () => {
   const router = useRouter();
-  const [state, setState] = useState();
 
   return (
     <Image
