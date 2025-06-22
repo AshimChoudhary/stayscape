@@ -5,9 +5,11 @@ import Avatar from '../Avatar';
 import { useCallback, useState } from 'react';
 import Menubar from './Menubar';
 import useRegister from '@/app/hooks/useRegisterModel';
+import useLoginModel from '@/app/hooks/useLoginModel';
 
 const UserMenu = () => {
   const registerModel = useRegister();
+  const loginModel = useLoginModel();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = useCallback(() => {
@@ -63,7 +65,7 @@ const UserMenu = () => {
         >
           <div className="flex flex-col curosr-pointer">
             <>
-              <Menubar onclick={() => {}} label="Login" />
+              <Menubar onclick={loginModel.onOpen} label="Login" />
               <Menubar onclick={registerModel.onOpen} label="Sign Up" />
             </>
           </div>

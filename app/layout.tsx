@@ -4,6 +4,7 @@ import { Nunito } from 'next/font/google';
 import Navbar from './components/navbar/Navbar';
 import Client from './components/Client';
 import RegisterModel from './components/modals/RegisterModel';
+import LoginModel from './components/modals/loginModel';
 import ToasterProvider from './Providers/ToasterProvider';
 
 export const metadata: Metadata = {
@@ -25,6 +26,7 @@ export default function RootLayout({
       <body className={`${font.className} antialiased`}>
         <Client>
           <ToasterProvider />
+          <LoginModel />
           <RegisterModel />
           <Navbar />
         </Client>
