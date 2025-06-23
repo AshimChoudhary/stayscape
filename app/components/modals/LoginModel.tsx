@@ -86,14 +86,14 @@ const LoginModel = () => {
         outline
         label="Continue with Google"
         icon={FcGoogle}
-        onclick={() => {}}
+        onclick={() => signIn('google')}
       />
 
       <Buttons
         outline
         label="Continue with Github"
         icon={AiFillGithub}
-        onclick={() => {}}
+        onclick={() => signIn('github')}
       />
 
       <div className="text-neutral-500 text-center mt-4 font-light justify-center">
