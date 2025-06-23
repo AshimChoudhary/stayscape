@@ -1,18 +1,17 @@
 'use client';
 
 import axios from 'axios';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { AiFillGithub } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import useRegister from '@/app/hooks/useRegisterModel';
-import { register } from 'module';
-import { error, log } from 'console';
 import Modals from './Modals';
 import Heading from '../Heading';
 import Input from '../Inputs/Input';
 import toast from 'react-hot-toast';
 import Buttons from '../Buttons';
+import { signIn } from 'next-auth/react';
 
 const RegisterModel = () => {
   const registerModel = useRegister();
@@ -48,11 +47,7 @@ const RegisterModel = () => {
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
-      <Heading
-        title="Welcome to StayScape"
-        subtitle="Create an Account"
-        // center
-      />
+      <Heading title="Welcome to StayScape" subtitle="Create an Account" />
 
       <Input
         id="email"
@@ -98,7 +93,7 @@ const RegisterModel = () => {
         outline
         label="Continue with Github"
         icon={AiFillGithub}
-        onclick={() => {}}
+        onclick={() => signIn('github')}
       />
 
       <div className="text-neutral-500 text-center mt-4 font-light justify-center">

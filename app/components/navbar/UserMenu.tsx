@@ -6,11 +6,11 @@ import { FC, useCallback, useState } from 'react';
 import Menubar from './Menubar';
 import useRegister from '@/app/hooks/useRegisterModel';
 import useLoginModel from '@/app/hooks/useLoginModel';
-import { User } from '@/app/generated/prisma';
 import { signOut } from 'next-auth/react';
+import { safeUser } from '@/app/types';
 
 interface UserMenuProps {
-  currentUser?: User | null;
+  currentUser?: safeUser | null;
 }
 
 const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {

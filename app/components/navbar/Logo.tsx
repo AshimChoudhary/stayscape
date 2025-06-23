@@ -7,13 +7,16 @@ const Logo = () => {
   const router = useRouter();
 
   return (
-    <Image
-      alt="Logo"
-      className="hidden md:block cursor-pointer"
-      height="100"
-      width="100"
-      src="/images/logo1.png"
-    />
+    <div className="relative w-[100px] h-[40px]">
+      <Image
+        src="/images/logo1.png"
+        alt="Logo"
+        fill
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        className="object-contain cursor-pointer hidden md:block"
+        priority
+      />
+    </div>
   );
 };
 
