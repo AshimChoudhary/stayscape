@@ -6,6 +6,7 @@ import Client from './components/Client';
 import RegisterModel from './components/modals/RegisterModel';
 import LoginModel from './components/modals/LoginModel';
 import ToasterProvider from './Providers/ToasterProvider';
+import getCurrentUser from './actions/getCurrentUser';
 
 export const metadata: Metadata = {
   title: 'Stay Scape',
@@ -16,11 +17,13 @@ const font = Nunito({
   subsets: ['latin'],
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const currentUser = await getCurrentUser();
+
   return (
     <html lang="en">
       <body className={`${font.className} antialiased`}>
@@ -28,7 +31,7 @@ export default function RootLayout({
           <ToasterProvider />
           <LoginModel />
           <RegisterModel />
-          <Navbar />
+          <Navbar currentUser={currentUser} />
         </Client>
         {children}
       </body>
