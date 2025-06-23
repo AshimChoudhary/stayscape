@@ -82,12 +82,12 @@ const LoginModel = () => {
     <div className="flex flex-col gap-4 mt-4">
       <hr />
 
-      <Buttons
+      {/* <Buttons
         outline
         label="Continue with Google"
         icon={FcGoogle}
         onclick={() => signIn('google')}
-      />
+      /> */}
 
       <Buttons
         outline
@@ -98,12 +98,12 @@ const LoginModel = () => {
 
       <div className="text-neutral-500 text-center mt-4 font-light justify-center">
         <div className="flex flex-row items-center gap-2">
-          <div>Already have an Account?</div>
+          <div>Dont have an Account?</div>
           <div
             className="text-neutral-800 cursor-pointer hover:underline "
             onClick={registerModel.onClose}
           >
-            Log In
+            Sign Up
           </div>
         </div>
       </div>

@@ -82,12 +82,12 @@ const RegisterModel = () => {
     <div className="flex flex-col gap-4 mt-4">
       <hr />
 
-      <Buttons
+      {/* <Buttons
         outline
         label="Continue with Google"
         icon={FcGoogle}
         onclick={() => signIn('google')}
-      />
+      /> */}
 
       <Buttons
         outline
