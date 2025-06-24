@@ -1,7 +1,7 @@
 'use client';
 
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { AiFillGithub } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
@@ -12,9 +12,11 @@ import Input from '../Inputs/Input';
 import toast from 'react-hot-toast';
 import Buttons from '../Buttons';
 import { signIn } from 'next-auth/react';
+import useLoginModel from '@/app/hooks/useLoginModel';
 
 const RegisterModel = () => {
   const registerModel = useRegister();
+  const loginModel = useLoginModel();
   const [loading, setLoading] = useState(false);
 
   const {
@@ -44,6 +46,11 @@ const RegisterModel = () => {
         setLoading(false);
       });
   };
+
+  const toggle = useCallback(() => {
+    registerModel.onClose();
+    loginModel.onOpen();
+  }, [loginModel, registerModel]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -101,7 +108,7 @@ const RegisterModel = () => {
           <div>Already have an Account?</div>
           <div
             className="text-neutral-800 cursor-pointer hover:underline "
-            onClick={registerModel.onClose}
+            onClick={toggle}
           >
             Log In
           </div>

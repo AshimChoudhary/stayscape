@@ -2,7 +2,7 @@
 
 import { signIn } from 'next-auth/react';
 import axios from 'axios';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { AiFillGithub } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
@@ -19,6 +19,7 @@ const LoginModel = () => {
   const router = useRouter();
   const registerModel = useRegister();
   const loginModel = useLoginModel();
+
   const [loading, setLoading] = useState(false);
 
   const {
@@ -51,6 +52,11 @@ const LoginModel = () => {
       }
     });
   };
+
+  const toggle = useCallback(() => {
+    loginModel.onClose();
+    registerModel.onOpen();
+  }, [loginModel, registerModel]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -98,12 +104,12 @@ const LoginModel = () => {
 
       <div className="text-neutral-500 text-center mt-4 font-light justify-center">
         <div className="flex flex-col items-center gap-2">
-          <div>Dont have an Account?</div>
+          <div>First time using StayScape</div>
           <div
             className="text-neutral-800 flex flex-col cursor-pointer hover:underline "
-            onClick={registerModel.onClose}
+            onClick={toggle}
           >
-            Sign Up
+            Create an Account..
           </div>
         </div>
       </div>

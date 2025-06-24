@@ -8,6 +8,7 @@ import useRegister from '@/app/hooks/useRegisterModel';
 import useLoginModel from '@/app/hooks/useLoginModel';
 import { signOut } from 'next-auth/react';
 import { safeUser } from '@/app/types';
+import useRentModel from '@/app/hooks/useRentModels';
 
 interface UserMenuProps {
   currentUser?: safeUser | null;
@@ -16,17 +17,25 @@ interface UserMenuProps {
 const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
   const registerModel = useRegister();
   const loginModel = useLoginModel();
+  const rentModel = useRentModel();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value);
   }, []);
 
+  const onRent = useCallback(() => {
+    if (!currentUser) {
+      return loginModel.onOpen();
+    }
+    rentModel.onOpen();
+  }, [currentUser, loginModel, rentModel]);
+
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
         <div
-          onClick={() => {}}
+          onClick={onRent}
           className="hidden md:block test-sm font-semibold px-4 py-3 rounded-full hover:bg-neutral-100 transiton cursor-pointer"
         >
           StayScape Your Home
@@ -76,7 +85,7 @@ const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
                 <Menubar onclick={() => {}} label="My Favourites" />
                 <Menubar onclick={() => {}} label="My Properties" />
                 <Menubar onclick={() => {}} label="My reservations" />
-                <Menubar onclick={() => {}} label="StayScape my Home" />
+                <Menubar onclick={rentModel.onOpen} label="StayScape my Home" />
                 <hr />
                 <Menubar onclick={() => signOut()} label="Log Out" />
               </>

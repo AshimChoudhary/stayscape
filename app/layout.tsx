@@ -7,6 +7,7 @@ import RegisterModel from './components/modals/RegisterModel';
 import LoginModel from './components/modals/LoginModel';
 import ToasterProvider from './Providers/ToasterProvider';
 import getCurrentUser from './actions/getCurrentUser';
+import RentModels from './components/modals/RentModels';
 
 export const metadata: Metadata = {
   title: 'Stay Scape',
@@ -29,6 +30,7 @@ export default async function RootLayout({
       <body className={`${font.className} antialiased`}>
         <Client>
           <ToasterProvider />
+          <RentModels />
           <LoginModel />
           <RegisterModel />
           <Navbar currentUser={currentUser} />
