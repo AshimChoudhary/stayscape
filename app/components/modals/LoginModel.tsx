@@ -97,10 +97,10 @@ const LoginModel = () => {
       />
 
       <div className="text-neutral-500 text-center mt-4 font-light justify-center">
-        <div className="flex flex-row items-center gap-2">
+        <div className="flex flex-col items-center gap-2">
           <div>Dont have an Account?</div>
           <div
-            className="text-neutral-800 cursor-pointer hover:underline "
+            className="text-neutral-800 flex flex-col cursor-pointer hover:underline "
             onClick={registerModel.onClose}
           >
             Sign Up
