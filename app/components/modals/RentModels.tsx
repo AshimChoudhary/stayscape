@@ -6,12 +6,15 @@ import { useMemo, useState } from 'react';
 import Heading from '../Heading';
 import { categoriesValues } from '../navbar/Categories';
 import CategoryInput from '../Inputs/CategoryInput';
-import { FieldValues, useForm } from 'react-hook-form';
+import { FieldValues, useForm, SubmitHandler } from 'react-hook-form';
 import CountrySelect from '../Inputs/CountrySelect';
 import dynamic from 'next/dynamic';
 import Counter from '../Inputs/Counter';
 import ImageUploads from '../Inputs/ImageUploads';
 import Input from '../Inputs/Input';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 enum STEPS {
   CATEGORY = 0,
@@ -24,6 +27,7 @@ enum STEPS {
 
 const RentModels = () => {
   const rentModel = useRentModel();
+  const router = useRouter();
 
   const [steps, setSteps] = useState(STEPS.CATEGORY);
 
@@ -43,7 +47,7 @@ const RentModels = () => {
       guestCount: 1,
       roomCount: 1,
       bathRoomCount: 1,
-      imgSrc: '',
+      imageSrc: '',
       price: 1,
       title: '',
       description: '',
@@ -55,7 +59,7 @@ const RentModels = () => {
   const guestCount = watch('guestCount');
   const roomCount = watch('roomCount');
   const bathRoomCount = watch('bathRoomCount');
-  const imgeSrc = watch('imgeSrc');
+  const imageSrc = watch('imageSrc');
   const Maps = useMemo(
     () =>
       dynamic(() => import('../Maps'), {
@@ -77,6 +81,29 @@ const RentModels = () => {
 
   const onNext = () => {
     setSteps((value) => value + 1);
+  };
+
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    if (steps != STEPS.PRICE) {
+      return onNext();
+    }
+    setIsLoading(true);
+
+    axios
+      .post('/api/listings', data)
+      .then(() => {
+        toast.success('Listing Created!');
+        router.refresh();
+        reset();
+        setSteps(STEPS.CATEGORY);
+        rentModel.onClose();
+      })
+      .catch(() => {
+        toast.error('Something went wrong.');
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const actionLabel = useMemo(() => {
@@ -170,8 +197,8 @@ const RentModels = () => {
           subtitle="Show guests what your place looks like!"
         />
         <ImageUploads
-          value={imgeSrc}
-          onChange={(value) => setCustomValue('imgeSrc', value)}
+          value={imageSrc}
+          onChange={(value) => setCustomValue('imageSrc', value)}
         />
       </div>
     );
@@ -230,7 +257,7 @@ const RentModels = () => {
       isOpen={rentModel.isOpen}
       title="StayScape Your Home"
       onClose={rentModel.onClose}
-      onSubmit={onNext}
+      onSubmit={handleSubmit(onSubmit)}
       actionLabel={actionLabel}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={steps == STEPS.CATEGORY ? undefined : onBack}
