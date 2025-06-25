@@ -52,6 +52,7 @@ const RentModels = () => {
   const guestCount = watch('guestCount');
   const roomCount = watch('roomCount');
   const bathRoomCount = watch('bathRoomCount');
+  const imgeSrc = watch('imgeSrc');
   const Maps = useMemo(
     () =>
       dynamic(() => import('../Maps'), {
@@ -165,7 +166,10 @@ const RentModels = () => {
           title="Add a photo of your place"
           subtitle="Show guests what your place looks like!"
         />
-        <ImageUploads />
+        <ImageUploads
+          value={imgeSrc}
+          onChange={(value) => setCustomValue('imgeSrc', value)}
+        />
       </div>
     );
   }
