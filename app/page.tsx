@@ -1,3 +1,38 @@
-export default function Home() {
-  return <div className="text-red-200 font-bold underline">Stay Scape</div>;
+import getListings from './actions/getActions';
+import getCurrentUser from './actions/getCurrentUser';
+import Client from './components/Client';
+import Components from './components/Components';
+import EmptyState from './components/EmptyState';
+import ListingCard from './components/listings/ListingCard';
+
+export default async function Home() {
+  const listings = await getListings();
+
+  const currentUser = await getCurrentUser();
+
+  if (listings.length == 0) {
+    return (
+      <Client>
+        <EmptyState showReset />
+      </Client>
+    );
+  }
+
+  return (
+    <Client>
+      <Components>
+        <div className="pt-24 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
+          {listings.map((listing: any) => {
+            return (
+              <ListingCard
+                key={listing.id}
+                data={listing}
+                currentUser={currentUser}
+              />
+            );
+          })}
+        </div>
+      </Components>
+    </Client>
+  );
 }
