@@ -1,4 +1,3 @@
-import { get } from 'http';
 import countries from 'world-countries';
 
 const formattedCountries = countries.map((country) => ({
