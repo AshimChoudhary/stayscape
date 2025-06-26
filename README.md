@@ -28,8 +28,6 @@ AirBnB is a modern full-stack property rental platform inspired by Airbnb. It al
 
 ### Backend & Services
 - **MongoDB** (via Prisma)
-- **Clerk** for authentication
-- **UploadThing** for image upload
 - **Vercel** for deployment
 
 ---
