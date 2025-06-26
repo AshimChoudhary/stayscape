@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AirBnB 🏡
 
-## Getting Started
+AirBnB is a modern full-stack property rental platform inspired by Airbnb. It allows users to list, browse, and book vacation homes and rentals with a clean and intuitive interface.
 
-First, run the development server:
+🚀 [Live Demo](https://property-rent-eight.vercel.app/)  
+🔗 [GitHub Repository](https://github.com/AshimChoudhary/stayscape)
 
+---
+
+## ✨ Features
+
+- 🏠 List and book rental properties
+- 🔍 Advanced filtering (location, price, category)
+- 🗺️ Map integration for property locations
+- 🧾 Booking management (View trips/reservations)
+- 🔐 Secure booking & reservation system
+- 💡 Dynamic listings, categories, and availability status
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- **Next.js 14 (App Router)**
+- **React.js**
+- **Tailwind CSS**
+- **TypeScript**
+
+### Backend & Services
+- **MongoDB** (via Prisma)
+- **Clerk** for authentication
+- **UploadThing** for image upload
+- **Vercel** for deployment
+
+---
+## ⚙️ Setup Locally
+
+### 1. Clone the repo
 ```bash
+git clone https://github.com/AshimChoudhary/stayscape.git
+cd stayscape
+
+npm install
+
+### Create .env file
+
+DATABASE_URL=your_mongodb_url
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
+NEXT_PUBLIC_UPLOADTHING_APP_ID=your_uploadthing_app_id
+UPLOADTHING_SECRET=your_uploadthing_secret
+
+### Push Prisma schema to DB
+
+npx prisma db push
+
+### Run the app
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Testing
+✅ Booking functionality
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+✅ Host listing creation and deletion
 
-## Learn More
+✅ Filtering logic (location, date, category)
 
-To learn more about Next.js, take a look at the following resources:
+✅ Auth flows (sign-in, sign-up, logout)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+📦 Deployment
+Deployed via Vercel — auto-deploys on every push to main.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+🙋‍♂️ Author
+Ashim Choudhary
+Email: panghalashim7832@gmail.com
+GitHub: github.com/AshimChoudhary
+LinkedIn: linkedin.com/in/ashim-choudhary-707191336
 
-## Deploy on Vercel
+📜 License
+This project is licensed under the MIT License.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
