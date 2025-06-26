@@ -1,42 +1,41 @@
-'use client';
+"use client";
 
-import useCountries from '@/app/hooks/useCountry';
-import { safeUser } from '@/app/types';
-import { FC } from 'react';
-import { IconType } from 'react-icons';
-import Avatar from '../Avatar';
-import ListingCategory from './ListingCategory';
-import dynamic from 'next/dynamic';
-import Maps from '../Maps';
+import useCountries from "@/app/hooks/useCountries";
+import { User } from "@prisma/client";
+import { IconType } from "react-icons";
+import Avatar from "../Avatar";
+import ListingCategory from "./ListingCategory";
+import dynamic from "next/dynamic";
 
-interface ListingInfoProps {
-  user: safeUser;
+const Map = dynamic(() => import("../Map"), {
+  ssr: false,
+});
+
+interface IListingInfoProps {
+  user: User;
   description: string;
   guestCount: number;
   roomCount: number;
-  bathRoomCount: number;
+  bathroomCount: number;
+  locationValue: string;
   category:
     | {
-        icon: IconType;
         label: string;
+        icon: IconType;
         description: string;
       }
     | undefined;
-  locationValue: string;
 }
 
-const ListingInfo: FC<ListingInfoProps> = ({
+const ListingInfo: React.FC<IListingInfoProps> = ({
   user,
   description,
-  roomCount,
-  bathRoomCount,
   guestCount,
-  category,
+  roomCount,
+  bathroomCount,
   locationValue,
+  category,
 }) => {
-  const Map = dynamic(() => import('../Maps'), {
-    ssr: false,
-  });
   const { getByValue } = useCountries();
 
   const coordinates = getByValue(locationValue)?.latlng;
@@ -44,14 +43,32 @@ const ListingInfo: FC<ListingInfoProps> = ({
   return (
     <div className="col-span-4 flex flex-col gap-8">
       <div className="flex flex-col gap-2">
-        <div className="text-xl font-semibold flex flex-row items-center gap-2">
+        <div
+          className="
+            text-xl
+            font-semibold
+            flex
+            flex-row
+            items-center
+            gap-2
+          "
+        >
           <div>Hosted by {user?.name}</div>
           <Avatar src={user?.image} />
         </div>
-        <div className="flex flex-row items-center font-light gap-4 text-neutral-500">
-          <div>{guestCount} Guests</div>
-          <div>{roomCount} Rooms</div>
-          <div>{bathRoomCount} Bath Rooms</div>
+        <div
+          className="
+            flex
+            flex-row
+            items-center
+            gap-4
+            font-light
+            text-neutral-500
+          "
+        >
+          <div>{guestCount} guests</div>
+          <div>{roomCount} rooms</div>
+          <div>{bathroomCount} bathrooms</div>
         </div>
       </div>
       <hr />
@@ -63,9 +80,9 @@ const ListingInfo: FC<ListingInfoProps> = ({
         />
       )}
       <hr />
-      <div className="text-lg font-loght text-neutral-500">{description}</div>
+      <div className="text-lg font-light text-neutral-500">{description}</div>
       <hr />
-      <Maps center={coordinates} />
+      <Map center={coordinates} />
     </div>
   );
 };

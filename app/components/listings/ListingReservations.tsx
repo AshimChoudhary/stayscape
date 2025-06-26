@@ -1,11 +1,12 @@
 'use client';
 
-import { FC } from 'react';
 import { Range } from 'react-date-range';
-import Calender from '../Inputs/Calender';
-import Buttons from '../Buttons';
 
-interface ListingReservationsProps {
+import Button from '../Buttons';
+
+import Calendar from '@/app/components/Inputs/Calendar';
+
+interface ListingReservationProps {
   price: number;
   dateRange: Range;
   totalPrice: number;
@@ -15,44 +16,59 @@ interface ListingReservationsProps {
   disabledDates: Date[];
 }
 
-const ListingReservations: FC<ListingReservationsProps> = ({
+const ListingReservation: React.FC<ListingReservationProps> = ({
   price,
   dateRange,
   totalPrice,
   onChangeDate,
   onSubmit,
-  disabledDates,
   disabled,
+  disabledDates,
 }) => {
   return (
-    <div className="bg-white rounded-xl border border-neutral-200 overflow-hidden w-full max-w-[380px] shadow-md">
-      <div className="p-4 flex items-end gap-1">
-        <div className="text-2xl font-semibold">${price}</div>
-        <div className="text-md font-light text-neutral-600">night</div>
+    <div
+      className="
+      bg-white 
+        rounded-xl 
+        border-[1px]
+      border-neutral-200 
+        overflow-hidden
+      "
+    >
+      <div
+        className="
+      flex flex-row items-center gap-1 p-4"
+      >
+        <div className="text-2xl font-semibold">$ {price}</div>
+        <div className="font-light text-neutral-600">night</div>
       </div>
-
       <hr />
-
-      <div className="px-4  flex justify-center ">
-        <Calender
-          value={dateRange}
-          disabledDates={disabledDates}
-          onChange={(value) => onChangeDate(value.selection)}
-        />
-      </div>
-
+      <Calendar
+        value={dateRange}
+        disabledDates={disabledDates}
+        onChange={(value) => onChangeDate(value.selection)}
+      />
       <hr />
-
       <div className="p-4">
-        <Buttons disabled={disabled} label="Reserve" onclick={onSubmit} />
+        <Button disabled={disabled} label="Reserve" onClick={onSubmit} />
       </div>
-
-      <div className="p-4 flex items-center justify-between text-lg font-semibold">
+      <hr />
+      <div
+        className="
+          p-4 
+          flex 
+          flex-row 
+          items-center 
+          justify-between
+          font-semibold
+          text-lg
+        "
+      >
         <div>Total</div>
-        <div>${totalPrice}</div>
+        <div>$ {totalPrice}</div>
       </div>
     </div>
   );
 };
 
-export default ListingReservations;
+export default ListingReservation;

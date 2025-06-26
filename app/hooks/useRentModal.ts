@@ -1,15 +1,15 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
-interface loginModel {
+interface RentModalState {
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
 }
 
-const useLoginModel = create<loginModel>((set) => ({
+const useRentModal = create<RentModalState>((set) => ({
   isOpen: false,
   onOpen: () => set({ isOpen: true }),
   onClose: () => set({ isOpen: false }),
 }));
 
-export default useLoginModel;
+export default useRentModal;

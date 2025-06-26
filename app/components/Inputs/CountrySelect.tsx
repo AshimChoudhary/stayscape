@@ -1,28 +1,28 @@
-'use client';
+"use client";
 
-import useCountries from '@/app/hooks/useCountry';
-import { FC } from 'react';
-import Select from 'react-select';
+import useCountries from "@/app/hooks/useCountries";
+import Select from "react-select";
 
 export type CountrySelectValue = {
-  flag: string;
   label: string;
-  latlng: string;
-  region: string;
   value: string;
+  flag: string;
+  latlng: number[];
+  region: string;
 };
 
 interface CountrySelectProps {
   value?: CountrySelectValue;
   onChange: (value: CountrySelectValue) => void;
 }
-const CountrySelect: FC<CountrySelectProps> = ({ value, onChange }) => {
+
+const CountrySelect: React.FC<CountrySelectProps> = ({ value, onChange }) => {
   const { getAll } = useCountries();
 
   return (
-    <div>
+    <div className="flex flex-col gap-2">
       <Select
-        placeholder="AnyWhere"
+        placeholder="Select a country"
         isClearable
         options={getAll()}
         value={value}
@@ -32,22 +32,22 @@ const CountrySelect: FC<CountrySelectProps> = ({ value, onChange }) => {
             <div>{option.flag}</div>
             <div>
               {option.label},
-              <span className="text-neutral-500 ml-1 ">{option.region}</span>
+              <span className="text-neutral-500 ml-1"> {option.region}</span>
             </div>
           </div>
         )}
         classNames={{
-          control: () => 'p-3 border-2',
-          input: () => 'text-lg',
-          option: () => 'text-lg',
+          control: () => "p-3 border-2",
+          input: () => "text-lg",
+          option: () => "text-lg ",
         }}
         theme={(theme) => ({
           ...theme,
           borderRadius: 6,
           colors: {
             ...theme.colors,
-            primary: 'black',
-            primary25: '#1ec8c8',
+            primary: "#737373",
+            primary25: "#ffe4e6",
           },
         })}
       />

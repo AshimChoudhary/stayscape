@@ -1,21 +1,20 @@
-'use client';
+"use client";
 
-import useCountries from '@/app/hooks/useCountry';
-import { safeUser } from '@/app/types';
-import { FC } from 'react';
-import Heading from '../Heading';
-import Image from 'next/image';
-import HeartButton from '../HeartButton';
+import useCountries from "@/app/hooks/useCountries";
+import { User } from "@prisma/client";
+import Heading from "../Heading";
+import Image from "next/image";
+import HeartButton from "../HeartButton";
 
-interface ListingHeadProps {
+interface IListingHeadProps {
   title: string;
   locationValue: string;
   imageSrc: string;
   id: string;
-  currentUser?: safeUser | null;
+  currentUser?: User | null;
 }
 
-const ListingHead: FC<ListingHeadProps> = ({
+const ListingHead: React.FC<IListingHeadProps> = ({
   title,
   locationValue,
   imageSrc,
@@ -23,22 +22,31 @@ const ListingHead: FC<ListingHeadProps> = ({
   currentUser,
 }) => {
   const { getByValue } = useCountries();
+
   const location = getByValue(locationValue);
 
   return (
     <>
       <Heading
         title={title}
-        subtitle={`${location?.label}, ${location?.region}`}
+        subtitle={`${location?.region}, ${location?.label}`}
       />
-      <div className="w-full overflow-hidden rounded-xl relative h-[60vh]">
+      <div
+        className="
+          w-full
+          h-[60vh]
+          overflow-hidden
+          rounded-xl
+          relative
+        "
+      >
         <Image
           alt="Image"
           src={imageSrc}
           fill
+          sizes="100%"
           className="object-cover w-full"
         />
-
         <div className="absolute top-5 right-5">
           <HeartButton listingId={id} currentUser={currentUser} />
         </div>

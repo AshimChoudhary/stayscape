@@ -2,12 +2,12 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Nunito } from 'next/font/google';
 import Navbar from './components/navbar/Navbar';
-import Client from './components/Client';
-import RegisterModel from './components/modals/RegisterModel';
-import LoginModel from './components/modals/LoginModel';
+import Client from './components/ClientOnly';
+import RegisterModel from './components/modals/RegisterModal';
+import LoginModel from './components/modals/LoginModal';
 import ToasterProvider from './Providers/ToasterProvider';
 import getCurrentUser from './actions/getCurrentUser';
-import RentModels from './components/modals/RentModels';
+import RentModels from './components/modals/RentModals';
 
 export const metadata: Metadata = {
   title: 'Stay Scape',

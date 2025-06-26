@@ -1,7 +1,8 @@
-'use client';
+"use client";
 
-import { TbBeach, TbMountain, TbPool } from 'react-icons/tb';
-import Components from '../Components';
+import Container from "../Container";
+
+import { TbBeach, TbMountain, TbPool } from "react-icons/tb";
 import {
   GiBarn,
   GiBoatFishing,
@@ -11,113 +12,129 @@ import {
   GiForestCamp,
   GiIsland,
   GiWindmill,
-} from 'react-icons/gi';
-import { MdOutlineVilla } from 'react-icons/md';
-import CategoryBox from '../CategoryBox';
-import { usePathname, useSearchParams } from 'next/navigation';
-import { FaSkiing, FaSkiingNordic } from 'react-icons/fa';
-import { BsSnow } from 'react-icons/bs';
-import { IoDiamond } from 'react-icons/io5';
+} from "react-icons/gi";
+import { FaSkiing } from "react-icons/fa";
+import { BsSnow } from "react-icons/bs";
+import { IoDiamond } from "react-icons/io5";
+import { MdOutlineVilla } from "react-icons/md";
+import CategoryBox from "../CategoryBox";
+import { usePathname, useSearchParams } from "next/navigation";
 
-export const categoriesValues = [
+import styles from "./Categories.module.css";
+
+export const categories = [
   {
-    label: 'Beach',
+    label: "Beach",
     icon: TbBeach,
-    description: 'This Property is close to the beach',
+    description: "This property is close to the beach!",
   },
   {
-    label: 'WindMills',
+    label: "Windmills",
     icon: GiWindmill,
-    description: 'This Property has windmills',
+    description: "This property is has windmills!",
   },
   {
-    label: 'Modern',
+    label: "Modern",
     icon: MdOutlineVilla,
-    description: 'This Property is Modern!',
+    description: "This property is modern!",
   },
   {
-    label: 'CountrySide',
+    label: "Countryside",
     icon: TbMountain,
-    description: 'This Property is in the Country Side!',
+    description: "This property is in the countryside!",
   },
   {
-    label: 'Pools',
+    label: "Pools",
     icon: TbPool,
-    description: 'This Property has a Pool!',
+    description: "This is property has a beautiful pool!",
   },
   {
-    label: 'Islands',
+    label: "Islands",
     icon: GiIsland,
-    description: 'This Property is on an Island!',
+    description: "This property is on an island!",
   },
   {
-    label: 'Lake',
+    label: "Lake",
     icon: GiBoatFishing,
-    description: 'This Property is close to a lake!',
+    description: "This property is near a lake!",
   },
   {
-    label: 'Sking',
+    label: "Skiing",
     icon: FaSkiing,
-    description: 'This Property has skiing Activities!',
+    description: "This property has skiing activies!",
   },
   {
-    label: 'Castles',
+    label: "Castles",
     icon: GiCastle,
-    description: 'This Property has a Castle!',
+    description: "This property is an ancient castle!",
   },
   {
-    label: 'Camping',
-    icon: GiForestCamp,
-    description: 'This Property has Camping Activities!',
-  },
-  {
-    label: 'Arctic',
-    icon: BsSnow,
-    description: 'This Property is in Arctic!',
-  },
-  {
-    label: 'Cave',
+    label: "Caves",
     icon: GiCaveEntrance,
-    description: 'This Property is in a Cave!',
+    description: "This property is in a spooky cave!",
   },
   {
-    label: 'Desert',
+    label: "Camping",
+    icon: GiForestCamp,
+    description: "This property offers camping activities!",
+  },
+  {
+    label: "Arctic",
+    icon: BsSnow,
+    description: "This property is in arctic environment!",
+  },
+  {
+    label: "Desert",
     icon: GiCactus,
-    description: 'This Property is in the Desert!',
+    description: "This property is in the desert!",
   },
   {
-    label: 'Barns',
+    label: "Barns",
     icon: GiBarn,
-    description: 'This Property is in the Barn!',
+    description: "This property is in a barn!",
   },
   {
-    label: 'Lux',
+    label: "Lux",
     icon: IoDiamond,
-    description: 'This Property is Luxirious!',
+    description: "This property is brand new and luxurious!",
   },
 ];
+
 const Categories = () => {
   const params = useSearchParams();
-  const category = params?.get('category');
-  const pathName = usePathname();
-  const isMainPage = pathName === '/';
+  const category = params?.get("category");
+  const pathname = usePathname();
+
+  const isMainPage = pathname === "/";
 
   if (!isMainPage) {
     return null;
   }
+
   return (
-    <Components>
-      <div className="pt-4 flex flex-row items-center justify-between overflow-x-autp">
-        {categoriesValues.map((item: any) => (
+    <Container>
+      <div
+        className={`
+        pt-4
+        flex
+        flex-row
+        items-center
+        justify-between
+        overflow-x-auto
+        overflow-
+        ${styles.categories}
+        `}
+      >
+        {categories.map((item) => (
           <CategoryBox
             key={item.label}
             label={item.label}
-            selected={category == item.label}
             icon={item.icon}
+            selected={item.label === category}
           />
         ))}
       </div>
-    </Components>
+    </Container>
   );
 };
 

@@ -1,12 +1,13 @@
 import prisma from '@/app/libs/prismadb';
 
-interface IParams {
+interface IGetListingById {
   listingId?: string;
 }
 
-export async function getListingById(params: IParams) {
+export default async function getListingById(params: IGetListingById) {
   try {
     const { listingId } = params;
+
     const listing = await prisma.listing.findUnique({
       where: {
         id: listingId,
@@ -19,14 +20,11 @@ export async function getListingById(params: IParams) {
     if (!listing) {
       return null;
     }
+
     return {
       ...listing,
-      createdAt: listing.createdAt.toISOString(),
       user: {
         ...listing.user,
-        createdAt: listing.user.createdAt.toISOString(),
-        updateAt: listing.user.updatedAt.toISOString(),
-        emailVerified: listing.user.emailVerified?.toISOString() || null,
       },
     };
   } catch (error: any) {

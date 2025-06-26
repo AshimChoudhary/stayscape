@@ -1,7 +1,7 @@
-import getListings from './actions/getActions';
+import getListings from './actions/getListings';
 import getCurrentUser from './actions/getCurrentUser';
-import Client from './components/Client';
-import Components from './components/Components';
+import Client from './components/ClientOnly';
+import Components from './components/Container';
 import EmptyState from './components/EmptyState';
 import ListingCard from './components/listings/ListingCard';
 
