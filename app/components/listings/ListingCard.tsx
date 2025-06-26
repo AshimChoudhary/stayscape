@@ -2,7 +2,7 @@
 
 import { Listing, Reservations, User } from '@/app/generated/prisma';
 import useCountries from '@/app/hooks/useCountry';
-import { safeUser } from '@/app/types';
+import { safeListings, safeUser } from '@/app/types';
 import { useRouter } from 'next/navigation';
 import React, { FC, useCallback, useMemo } from 'react';
 import { format } from 'date-fns';
@@ -11,7 +11,7 @@ import HeartButton from '../HeartButton';
 import Buttons from '../Buttons';
 
 interface ListingCardProps {
-  data: Listing;
+  data: safeListings;
   reservation?: Reservations;
   onAction?: (id: string) => void;
   disabled?: boolean;
@@ -83,7 +83,7 @@ const ListingCard: FC<ListingCardProps> = ({
             "
           />
           <div className="absolute top-3 right-3">
-            <HeartButton listingID={data.id} currentUser={currentUser} />
+            <HeartButton listingId={data.id} currentUser={currentUser} />
           </div>
         </div>
         <div className="font-semibold text-lg">

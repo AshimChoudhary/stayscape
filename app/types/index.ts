@@ -1,4 +1,8 @@
-import { User } from '../generated/prisma';
+import { Listing, User } from '../generated/prisma';
+
+export type safeListings = Omit<Listing, 'createdAt'> & {
+  createdAt: string;
+};
 
 export type safeUser = Omit<
   User,
