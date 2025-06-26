@@ -12,6 +12,7 @@ import axios from 'axios';
 import { differenceInCalendarDays, eachDayOfInterval } from 'date-fns';
 import { useRouter } from 'next/navigation';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
+import { Range } from 'react-date-range';
 import toast from 'react-hot-toast';
 
 const initialDateRange = {
@@ -51,7 +52,7 @@ const ListingClient: FC<ListingClientProps> = ({
 
   const [isLoading, setIsLoading] = useState(false);
   const [totalPrice, setTotalPrice] = useState(listing.price);
-  const [dateRange, setDateRange] = useState(initialDateRange);
+  const [dateRange, setDateRange] = useState<Range>(initialDateRange);
 
   const onCreateReservation = useCallback(() => {
     if (!currentUser) {
@@ -110,7 +111,7 @@ const ListingClient: FC<ListingClientProps> = ({
             currentUser={currentUser}
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-7 md:gap-10mt-6">
+          <div className="grid grid-cols-1 md:grid-cols-7 md:gap-10 mt-6">
             <ListingInfo
               user={listing.user}
               category={category}
