@@ -43,11 +43,8 @@ const ImageUploads: FC<ImageUploadprops> = ({ onChange, value }) => {
                 <Image
                   alt="Upload"
                   fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   style={{ objectFit: 'cover' }}
                   src={value}
-                  priority
-                  className="rounded-2xl"
                 />
               </div>
             )}
