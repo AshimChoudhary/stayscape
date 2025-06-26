@@ -69,12 +69,6 @@ Testing
 📦 Deployment
 Deployed via Vercel — auto-deploys on every push to main.
 
-🙋‍♂️ Author
-Ashim Choudhary
-Email: panghalashim7832@gmail.com
-GitHub: github.com/AshimChoudhary
-LinkedIn: linkedin.com/in/ashim-choudhary-707191336
-
 📜 License
 This project is licensed under the MIT License.
 
